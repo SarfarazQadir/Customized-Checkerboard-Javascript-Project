@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Customize Checkerboard</title>
+
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+<style>
+  .container {
+    margin-top: 120px;
+  }
+  .checkerboard {
+    display: grid;
+    margin: 10px;
+    
+  }
+  .checkerboard div {
+    width: 50px;
+    height: 50px;
+  }
+</style>
+</head>
+<body class="container">
+    
+<div class="row">
+    <div class="col">
+        <label for="rows" class="form-label">Rows:</label>
+        <input type="number" id="rows" class="form-control" min="1" value="8">
+    </div>
+    <div class="col">
+        <label for="columns" class="form-label">Columns:</label>
+        <input type="number" id="columns" class="form-control" min="1" value="8">
+    </div>
+</div>
+<div class="row">
+    <div class="col">
+        <label for="color1" class="form-label">Color 1:</label>
+        <input type="color" id="color1" class="form-control">
+    </div>
+    <div class="col">
+        <label for="color2" class="form-label">Color 2:</label>
+        <input type="color" id="color2" class="form-control">
+    </div>
+</div>
+<button onclick="generateCheckerboard()" class="btn btn-primary mt-2">Generate Checkerboard</button>
+
+<div id="checkerboard" class="checkerboard"></div>
+
+<script>
+function generateCheckerboard() {
+  var rows = document.getElementById('rows').value;
+  var columns = document.getElementById('columns').value;
+  var color1 = document.getElementById('color1').value;
+  var color2 = document.getElementById('color2').value;
+  var checkerboard = document.getElementById('checkerboard');
+  checkerboard.innerHTML = '';
+  checkerboard.style.gridTemplateRows = `repeat(${rows}, 1fr)`;
+  checkerboard.style.gridTemplateColumns = `repeat(${columns}, 1fr)`;
+
+  for (var i = 0; i < rows; i++) {
+    for (var j = 0; j < columns; j++) {
+      var cell = document.createElement('div');
+      if ((i + j) % 2 === 0) {
+        cell.style.backgroundColor = color1;
+      } else {
+        cell.style.backgroundColor = color2;
+      }
+      checkerboard.appendChild(cell);
+    }
+  }
+}
+</script>
+
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+
+</body>
+</html>
